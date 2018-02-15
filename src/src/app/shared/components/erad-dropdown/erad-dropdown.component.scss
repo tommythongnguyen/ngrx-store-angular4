@@ -1,0 +1,70 @@
+:host{ 
+    .container{
+        padding:0;
+        width: 268px;
+        color: #ff6600;
+        .interact{
+            color: #444 !important;
+            background-color: #fff;
+        }
+        &:hover{
+            @extend .interact;
+            color:blue;
+        }
+       
+        .erad-dropdown-header{
+            padding-right: 7px;
+            line-height: 1.5;
+            font-weight: normal;
+            background-color: #fff;
+            height: 35px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: left;
+            text-shadow: 0 0 0 #fff;
+            background-image: none !important;
+
+            i.pull-right{
+                margin-top:3px;
+            }
+
+            input{
+                border: none;
+                width:90%;
+                &:focus {
+                    outline:none;
+                }
+            }
+        }  
+        
+        .dropdown-menu-tenant{
+            display:none;
+            z-index: 3 !important;
+            //top: 33px;
+            left: 0;
+            border-radius: 4px;
+            min-width: 100%;
+            width: 100%;
+            li{
+                &:hover{
+                    cursor: pointer;
+                }
+                a{
+                    line-height: 3;
+                }    
+            }    
+        }
+        .visible{
+            display:block;
+        }
+        .hidden{
+            display: none;
+        }
+
+        .disableBtn{
+            pointer-events:none;
+        }
+    }
+    
+    
+}

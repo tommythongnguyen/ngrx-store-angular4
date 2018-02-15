@@ -1,0 +1,101 @@
+<div class="header-title"><span (click)="goToUserProvision();">User Provisioning</span>  » Add User</div>
+<div class="tenant-add-edit-url-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="col-sm-12 ">
+                <div class="col-sm-2 text-right">
+                    <label>First Name</label> </div>
+                <div class="col-sm-8">
+                    <input class="form-control" formControlName="firstname" placeholder="Enter First Name" id="userfirstname" maxlength="20">
+                    <control-error  [parent]="userForm"
+                                        control="firstname"
+                                        label ="First name"
+                                        [errors]="{ required : 'is required',max:'is invalid',alpha: 'must contain letters only'}">
+                    </control-error>
+                </div>
+            </div>
+            <div class="col-sm-12 margin-top-input">
+                <div class="col-sm-2 text-right">
+                    <label>Last Name</label></div>
+                <div class="col-sm-8 ">
+                    <input class="form-control" formControlName="lastname" placeholder="Enter Last Name" id="userlastname" maxlength="20">
+                    <control-error  [parent]="userForm"
+                                        control="lastname"
+                                        label ="Last name"
+                                        [errors]="{ required : 'is required',max:'is invalid',alpha: 'must contain letters only'}">
+                    </control-error>
+                </div>
+            </div>
+            <div class="col-sm-12 margin-top-input">
+                <div class="col-sm-2 text-right">
+                    <label>User ID</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control" formControlName="userid" placeholder="Enter User ID" id="tenantuserid">
+                    <control-error  [parent]="userForm"
+                                        control="userid"
+                                        label ="UserID"
+                                        [errors]="{ required : 'is required',max:'is invalid',min:'is invalid', 
+                                        dbduplicate: 'is not available'}">
+                    </control-error>
+                </div>
+            </div>
+            <div class="col-sm-12 margin-top-input">
+                <div class="col-sm-2 text-right">
+                    <label>User E-mail</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" formControlName="email" placeholder="Email" id="tenantuseremail">
+                    <control-error  [parent]="userForm"
+                                        control="email"
+                                        label ="Email"
+                                        [errors]="{ required : 'is required',customEmail:'is incorrect format'}">
+                    </control-error>
+                </div>
+            </div>
+            <div class="col-sm-12 margin-top-input">
+                <div class="col-sm-2 text-right">
+                    <label>Business Manager</label>
+                </div>
+                <div class="col-sm-8">
+                    <select class="form-control" formControlName="approver">
+                            <option value="">Please select Manager</option>
+                            <option *ngFor="let businessManager of businessManagers$| async" 
+                                    [ngValue]="businessManager?.id">{{businessManager?.firstname}} {{businessManager?.lastname}}
+                            </option>
+                        </select>
+                        <control-error  [parent]="userForm"
+                                        control="businessmanager"
+                                        label ="Business Manager"
+                                        [errors]="{ required : 'is required'}">
+                        </control-error>
+                </div>
+            </div>
+
+            <div class="col-sm-12 margin-top-input">
+                <div class="col-sm-2 text-right">
+                    <label>Select Role</label></div>
+                <div class="col-sm-8">
+                    <select class="form-control" formControlName="role">
+                            <option value="">Please select Role</option>
+                            <option *ngFor="let userrole of userRoles" 
+                                    [ngValue]="userrole?.name">{{userrole?.name}}
+                            </option>
+                    </select>
+                    <control-error  [parent]="userForm"
+                                        control="role"
+                                        label ="Role"
+                                        [errors]="{ required : 'is required'}">
+                    </control-error>
+                </div>
+            </div>
+ 
+            <div class="col-md-12 bottom-block">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8 text-right">
+                    <button type="submit" id="save-margin" [disabled]="userForm.invalid" class="btn btn-save">Save</button>
+                    <button class="btn btn-cancel">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+</div>

@@ -1,0 +1,49 @@
+<div class="col-sm-12 padding-zero settings-border" [loading]="isLoading">
+    <div class="sub-header">Upload Tenant Specific Logo</div>
+    <div class="col-sm-12">
+        <div class="col-sm-2 text-right">
+            <label for="fqdn">Logo</label>
+        </div>
+        <div class="col-sm-8">
+            <p class="sub-content">Your logo appears when an admin user authenticates. A PNG file is required. We recommend that the logo be on
+                a transparent background, 50x50px in size
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 padding-zero">
+            <div class="upload-logo" *ngIf="uploadedLogoName">
+                <img src='../../../../assets/images/logo/{{uploadedLogoName}}' alt="">
+            </div>
+            <div style="background-color:#888;width:100px;padding-left:6px;border-bottom-left-radius:4px;border-top-left-radius:4px">
+                <erag-file-upload [show]="true" [authToken]="authToken" [fileType]="fileType" maxSize="5KB" fileRef="logo" [executeUploadFile]="logoUploadReady"
+                    [userInfo]="tenantUploadInfo" [api]="api" [deleteFiles]="deleteLogo" (addFile)="onLogoAddingFile($event)"
+                    (addInvalidFile)="onAddingInvalidLogoFile($event)" (uploadSuccess)="onLogoUploadSuccess($event)" (uploadFailure)="onLogoUploadFailure($event)">
+                </erag-file-upload>
+            </div>
+
+            <label *ngIf="selectedLogo">
+                        <span class="fa fa-times delete-icon" (click)="onClearLogo()"></span>
+                        <span class="logo-name">{{selectedLogo}}</span>
+                </label>
+
+            <p class="context-message">maximum file size of 5KB and 50pxX50px.</p>
+        </div>
+    </div>
+    <div class="col-sm-12 padding-zero">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 padding-zero">
+            <erag-alert-message [show]="invalidLogoImage">
+                Please select {{fileType}} file for Client Certificate.
+            </erag-alert-message>
+        </div>
+    </div>
+
+    <div class="col-sm-12 but-border">
+        <button type="button" class="btn btn-success btn-sm btn-form-submit" [ngClass]="{'btn-disabled': !isSelected}" (click)="onSubmit()">
+                {{preloadData? 'Update': 'Submit'}}
+           </button>
+    </div>
+</div>
+<erag-toaster [show]="showToastr" [config]="toastrConfig"></erag-toaster>

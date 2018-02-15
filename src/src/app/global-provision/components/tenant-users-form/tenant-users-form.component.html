@@ -1,0 +1,66 @@
+<form [formGroup]="usersForm" (ngSubmit)="submitForm()">
+    <div class="panel-inside">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="{{user.role}}usrname">First Name</label>
+                <input type="text" class="form-control" id="{{user.role}}usrname" placeholder="First name" formControlName="firstname">
+                <control-error [parent]="usersForm" control="firstname" label="First name" [errors]="{ alpha: 'must contain letters only'}">
+                </control-error>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="{{user.role}}lastname">Last Name</label>
+                <input type="text" class="form-control" id="{{user.role}}lastname" placeholder="Last name" formControlName="lastname">
+
+                <control-error [parent]="usersForm" control="lastname" label="Last name " [errors]="{ alpha: 'must contain letters only'}">
+                </control-error>
+            </div>
+        </div>
+
+        <div class="col-sm-12" style="padding:0px">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="{{user.role}}usrid">User ID</label>
+                    <input type="text" class="form-control" id="{{user.role}}usrid" placeholder="User id" formControlName="userid">
+
+                    <control-error [parent]="usersForm" 
+                                   control="userid" 
+                                   lable="User id" 
+                                   [errors]="{
+                                       duplicate: 'must be different than other users',
+                                       notAllow: 'white spaces is not allowed',
+                                       dbduplicate: 'is not available'
+                                    }">
+                    </control-error>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="{{user.role}}usremail">Email</label>
+                    <input type="text" class="form-control" id="{{user.role}}usremail" placeholder="email@domainName" formControlName="email">
+
+                    <control-error [parent]="usersForm" control="email" label="Email" [errors]="{ customEmail: 'is incorrect format',
+                                                        domainMismatch: 'domain is misMatched',
+                                                        duplicate: 'must be different than other users'
+                                                    }">
+                    </control-error>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 btn-controls-container">
+        <div class="col-md-6 btn-left-container">
+            <button id="backbutton" class="btn btn-sm btn-cust" (click)="onBackBtnClick()">Back
+                    </button>
+        </div>
+        <div class="col-md-6 btn-right-container">
+            <button type="submit" class="btn btn-sm btn-cust" [disabled]="!allowNextSaveBtn">
+                        {{user.role ==='Business Manager' ? 'Submit': 'Next'}}
+                    </button>
+        </div>
+    </div>
+</form>

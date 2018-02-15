@@ -1,0 +1,36 @@
+:host{ 
+    .tabs-icons{
+        border-right: 0px solid #E0E0E0;
+        padding-bottom: 40px;
+        ul{
+            list-style: none outside none;
+            padding-left: 0;
+            margin: 0;
+
+            .circle-nav{
+                margin: 20px 5px 0px 0px;
+                padding-top: 11px;
+                text-align: center;
+                font-size: 18px !important;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                color: #fff;
+                background-color: #f3a59e;
+                &.active{
+                    background-color: #e84c3d;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .disableNav {
+        cursor: not-allowed;
+        opacity: 0.65;
+        box-shadow: none;
+        pointer-events: none;
+    }
+}

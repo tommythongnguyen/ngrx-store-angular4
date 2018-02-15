@@ -1,0 +1,22 @@
+:host {
+    .loading-mask {
+        z-index: 999999;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: black;
+        opacity: 0.1;
+    }
+
+    .hostPosition {
+        position: relative;
+    }
+
+    .loding-icon:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+}

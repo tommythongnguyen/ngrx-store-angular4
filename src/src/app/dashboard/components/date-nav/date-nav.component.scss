@@ -1,0 +1,29 @@
+:host {
+    ul{
+        white-space: nowrap;
+        list-style-type: none;
+        background-color: rgb(132, 178, 229);
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+        li{
+            float: left;
+            display: block;
+            white-space: nowrap;
+            padding: 3px 24px;
+            &:hover{
+                background-color: rgb(54, 91, 107);
+                color: rgb(255, 255, 255);
+                cursor: pointer;
+            } 
+        }
+        .disable {
+            pointer-events: none;
+            opacity: 0.6;
+        } 
+        .active{
+            background-color: rgb(54, 91, 107);
+            color: rgb(255, 255, 255);
+        }   
+    }
+}

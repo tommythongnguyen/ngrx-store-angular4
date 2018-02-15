@@ -1,0 +1,127 @@
+body {
+    background-color: #ddd !important;
+    font-family: Trebuchet MS, Times, serif;
+}
+
+.log-box-outer {
+    background-color: #fff;
+    margin: 110px 0px 0px 0px;
+    border: 5px solid #ddd;
+    height: 450px;
+}
+
+.logo-heading {
+    padding: 0px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
+    height: 50px;
+    color: #fff;
+    background-color: #ddd;
+    line-height: 2.5;
+    font-size: 1.5em
+}
+
+.log-box {
+    margin: 20px 0px 10px 0px;
+    padding: 10px 0px 0px 0px;
+    background-color: #fff;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #000;
+    font-weight: normal
+}
+
+.login-bg {
+    background: url(../../../assets/images/login-Page-bg.png);
+    background-color: #fff;
+    background-repeat: repeat-x;
+    height: 470px;
+}
+
+.login-box {
+    background-color: #ccc;
+    text-align: left;
+    color: #fff
+}
+
+.text-center p {
+    color: #fff
+}
+
+.error {
+    color: #DF370D
+}
+
+.text-small {
+    color: #999;
+    font-size: 0.85em
+}
+
+.nav a {
+    font-size: 1.1em;
+    color: #fff
+}
+
+.nav a:hover {
+    background-color: #fff;
+    font-size: 1.1em;
+    color: #333
+}
+
+.page-title {
+    margin: 13px 0 13px 0px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #333;
+}
+
+.inner-pan {
+    background-color: #D9F3FA;
+    margin: 0px 0px 10px 0px;
+    padding: 10px
+}
+
+.btn-normal {
+    background-color: #f96302
+}
+
+.btn-add {
+    background-color: green
+}
+
+.serachiput {
+    height: 34px;
+    border: none;
+}
+
+.table-icon-delete {
+    color: red;
+    font-size: 1.2em
+}
+
+.table-icon-edit {
+    color: green;
+    font-size: 1.1em
+}
+
+
+
+.btn-common-inn {
+    color: #fff;
+    line-height: 1;
+    padding: 10px;
+    font-weight: normal;
+    cursor: pointer;
+    background-color: #f96302;
+    border: none;
+    border-bottom: 2px solid #d45300;
+}
+
+.error-block {
+    padding-top: 100px;
+    text-align:center;
+}
+
+.col-sm-4 > label{font-weight:normal;}
+.col-sm-4 > div{padding:0px}

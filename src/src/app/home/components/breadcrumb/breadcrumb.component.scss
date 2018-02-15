@@ -1,0 +1,18 @@
+:host{
+
+    .breadcrumb-box{
+           font-weight: 200;
+            color: #999;
+        
+        .tenant-box{
+            right: 0px;
+            position: fixed;
+            width: 283px;
+            background-color: #fff;
+            padding: 6px 15px 0 0;
+            z-index:4;   
+        }
+    }
+    .breadcrumb-box span{line-height: 1.6;}
+    
+}

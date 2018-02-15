@@ -1,0 +1,23 @@
+:host::ng-deep{
+    ul.pagination{
+        margin: 0;
+        .pagination-first, .pagination-last{
+            a{
+                @extend .anchor;
+                width: 30px;  
+            }  
+        }
+        .pagination-page{
+            a{
+                @extend .anchor;
+                width: 34px;
+            }
+        }
+
+        .anchor{
+            height: 34px;
+            padding-top: 7px;
+        }
+    }
+    
+}

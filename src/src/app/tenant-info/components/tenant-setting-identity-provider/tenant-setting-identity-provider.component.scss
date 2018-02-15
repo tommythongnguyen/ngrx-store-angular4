@@ -1,0 +1,43 @@
+:host{
+ .sub-header {
+        font-size: 15px;
+        color: #2496f1;
+        padding: 8px 12px;
+        border-top: 0px dashed #eee;
+        border-bottom: 1px solid #eee;
+        margin: 0px 0 15px 0 !important;
+    }
+   
+    .but-border{padding:4px;margin:10px 0 0 0;border-top: 1px solid #eee;}
+    .form-control{margin-bottom:5px;}
+    form{
+        .error-message{
+            color:red;
+        }
+        .btn-form-submit{
+            float: right;
+        }
+        
+        .flex-container{
+            display: flex;
+            .form-control{
+                flex-grow:1;
+                border-top-right-radius: 0;
+                border-bottom-right-radius:0;
+            }
+        }
+        .padding-zero {
+            padding: 0;
+        }
+        .context-message{
+            display: block;
+            color: #c9c8c8;
+            font-size: 12px;
+        }
+        .container-margin {
+            margin-top: 10px;
+        }
+
+    }
+    
+}

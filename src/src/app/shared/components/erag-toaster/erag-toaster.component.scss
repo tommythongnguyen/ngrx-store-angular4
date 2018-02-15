@@ -1,0 +1,10 @@
+:host ::ng-deep{
+    .toast-middle-center {
+        top: 40%;
+        right: 0;
+        width: 100%;
+        div.toast {
+            margin: auto !important;
+        }
+    }
+}

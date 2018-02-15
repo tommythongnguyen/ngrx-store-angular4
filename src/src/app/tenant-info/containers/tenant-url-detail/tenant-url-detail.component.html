@@ -1,0 +1,280 @@
+<div class="header-title"><span (click)="goToURLProvision();">URL Provisioning</span>  » {{(_actionType=='edit' ? 'Edit URL': 'Add URL')}}</div>
+<div class="tenant-add-edit-url-container">
+    <form [formGroup]="urlForm" (ngSubmit)="onSubmit()">
+        <div class="form-container">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Url</label>
+                    </div>
+                    <div class="col-sm-8 text-left">
+                        <input type="text" formControlName="url" class="form-control" (blur)="stripUrl()">
+                        <control-error [parent]="urlForm" control="url" label="Url" 
+                        [errors]="{required: 'is required',isValid:'is Invaild ', dbduplicate: 'is not available'}">
+                        </control-error>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Type</label>
+                    </div>
+                    <div class="col-sm-8 text-left">
+                        <div class="type-one radio radio-info">
+                            <input type="radio" formControlName="type" id="domain" value="Domain"><label for="domain"> Domain</label>
+                            <span class="context-message">Domain level access (default)</span>
+                        </div>
+                        <div class="type-one radio radio-info">
+                            <input type="radio" formControlName="type" id="app" value="App"><label for="app"> App</label>
+                            <span class=" context-message">Application level access</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Protocol</label>
+                    </div>
+                    <div formGroupName="settings" class="col-sm-8 text-left">
+                        <div class="type-one radio radio-info">
+                            <input type="radio" class="accessResource" formControlName="protocol" id="protocolhttps" value="https" selected>
+                            <label for="protocolhttps"> Https </label>
+                            <span class="context-message">(default)</span>
+                        </div>
+                        <div class="type-two radio radio-info">
+                            <input type="radio" class="accessResource" formControlName="protocol" id="protocolhttp" value="http">
+                            <label for="protocolhttp"> Http </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Port</label>
+                    </div>
+                    <div formGroupName="settings" class="col-sm-8 text-left">
+                        <div class="type-one radio radio-info">
+                            <input type="radio" class="urlType" formControlName="port" id="portDefault" value="Default">
+                            <label for="portDefault"> Default </label>
+                            <span class="context-message">Default option indicates, URL will be using Port 443 (default)</span>
+                        </div>
+                        <div class="type-two radio radio-info">
+                            <input type="radio" class="urlType" formControlName="port" id="portCustom" value="Custom">
+                            <label for="portCustom"> Custom Port </label>
+                            <span class="context-message">Url will use Custom port (0 - 65535)</span>
+                            <ng-container *ngIf="isSelectedPortCustom">
+                                <input type="number" class="textWidth" formControlName="customport" min="999" max="99999" required>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Access</label>
+                    </div>
+                    <div formGroupName="settings" class="col-sm-8 text-left">
+                        <div class="type-one radio radio-info">
+                            <input type="radio" class="accessResource" formControlName="access_resource" id="onpremise" value="onPremise" selected>
+                            <label for="onpremise"> On-Premise </label>
+                            <span class="context-message">Access through gateway (default)</span>
+                        </div>
+                        <div class="type-two radio radio-info">
+                            <input type="radio" class="accessResource" formControlName="access_resource" id="cloud" value="cloud">
+                            <label for="cloud"> Cloud </label>
+                            <span class="context-message"> Access through internet directly</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>Method</label>
+                    </div>
+                    <div formGroupName="settings" class="col-sm-8 text-left" style="padding-left:6px">
+                        <div formGroupName="method" class="type-two checkbox checkbox-success">
+                            <input type="checkbox" name="all" id="methodall" [checked]="checkAll" (change)="toggleAllMethod($event)" /><label for="methodall"> All</label>
+                            <input type="checkbox" formControlName="get" id="methodget" (change)="resetFormMethods('get')" /> <label for="methodget">GET</label>
+                            <input type="checkbox" formControlName="post" id="methodpost" (change)="resetFormMethods('post')" /> <label for="methodpost">POST</label>
+                            <input type="checkbox" formControlName="put" id="methodput" (change)="resetFormMethods('put')" /> <label for="methodput">PUT</label>
+                            <input type="checkbox" formControlName="delete" id="methoddelete" (change)="resetFormMethods('delete')" /> <label for="methoddelete">DELETE</label>
+                            <!-- <input type="checkbox" formControlName="options" id="methodoptions" (change)="resetFormMethods('options')" /> <label for="methodoptions">OPTIONS</label> -->
+                            <control-error [parent]="urlForm" control="settings.controls.method.get" label="Method" [errors]="{checkrequired: 'is required'}">
+                            </control-error>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 text-left ip-container">
+                    <div class="col-sm-2 text-right">
+                        <label>URL IP</label>
+                    </div>
+                    <div formGroupName="settings" class="col-sm-8 text-left">
+                        <input class="form-control" placeholder="0.0.0.0" id="urlip" formControlName='urlip' />
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-2 text-right">
+                        <label>NTLM</label>
+                    </div>
+                    <div class="col-sm-8 text-left" style="padding-left:6px">
+                        <div formGroupName="settings" class="checkbox checkbox-success ntlm-sub-container">
+                            <input type="checkbox" formControlName="is_ntml" value="" id="chkbxNTLM" ng-click="" ng-model="vm.isNTLMSelected"><label for="chkbxNTLM"> NT LAN Manager</label> 
+                            <span class="show-block-text float-none">
+                                <a href="#">
+                                    <i ng-click="vm.showNTLMHelpSection=true" id="helpNTLM" class="fa fa-question-circle fa-lg" aria-hidden="true"></i>
+                                </a>
+                                  <div class="hide-block-text" id="helpNTLM" >
+                                    <div class="context-message" style="padding-left:10px">Selecting the NTLM option shall indicate the URL is using NTLM Authentication.</div>
+                                  </div>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 text-left group-container">
+                    <div class="col-sm-2 text-right">
+                        <label>Groups</label>
+                    </div>
+                    <div class="col-sm-8 text-left">
+                        <!--select multiple formControlName="group">
+                            <option *ngFor="let group of GroupData$| async" 
+                                    [ngValue]="group?.id">{{group?.name}}
+                            </option>
+                        </select-->
+                        <tenant-ulr-group-dropdown [list]="GroupData$| async"
+                                                   [show]="showGroupDropdown"
+                                                   [existList] ="tenantUrlData"
+                                                   (toggle)="onGropDropdownToggle($event)"
+                                                   (selected)="onGroupDropdownSelected($event)">
+                        </tenant-ulr-group-dropdown>
+                        <control-error [parent]="urlForm" control="group" label="Group" 
+                            [errors]="{required: 'is required'}">
+                        </control-error>
+                        <span class="context-message">Groups can be used for management, reporting, and policy.</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 approver-container" *ngIf="isTenantAdmin">
+                    <div class="col-sm-2 text-right">
+                        <label>Approver</label>
+                    </div>
+                    <div class="col-sm-8 text-left">
+                        <!-- <ng-container *ngIf="ApproverData$| async"> -->
+                        <select formControlName="approver">
+                                <option *ngFor="let approver of ApproverData$| async" 
+                                        [ngValue]="approver?.id">{{approver?.firstname}} {{ approver?.lastname}}
+                                </option>
+                        </select>
+                        <!-- </ng-container> -->
+                    </div>
+                </div>
+
+                <div class="col-sm-12 date-container">
+                    <div class="col-sm-12 text-left">
+                        <div class="col-sm-2 text-right">
+                            <label>Start Date</label>
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <p class="input-group">
+                                <date-time-picker [show]="showFromDate" [initDate]="fromDateValue" (toggle)="onToggleFromDate($event)" (selected)="onSelectFromDate($event)">
+                                </date-time-picker>
+                                <!-- <input type="date" formControlName="startDate" id="Dashfromdate" class="form-control" /> -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 date-container">
+                    <div class="col-sm-12">
+                        <div class="col-sm-2 text-right">
+                            <label>Valid Till</label>
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <p class="input-group">
+                                <date-time-picker [show]="showToDate" [initDate]="toDateValue" [maxDate]="maxDateValue" (toggle)="onToggleToDate($event)" (selected)="onSelectToDate($event)">
+                                </date-time-picker>
+                                <!-- <input type="date" formControlName="endDate" id="Dashtodate" class="form-control" /> -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <label>Validation Checks</label>
+                </div>
+                <div formGroupName="settings">
+                    <div class="col-sm-12 validate-container">
+                        <div class="col-sm-2 text-right">
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <div class="float-left">
+                                <div formGroupName="configuration" class="onoffswitch">
+                                    <input type="checkbox" formControlName="geo" class="onoffswitch-checkbox" id="geo-switch">
+                                    <label class="onoffswitch-label" for="geo-switch">
+                                          <span class="onoffswitch-inner"></span>
+                                          <span class="onoffswitch-switch"></span>
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="geo-container">GEO<span class="context-message">Validate User  Geo location.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 validate-container">
+                        <div class="col-sm-2 text-right">
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <div class="float-left">
+                                <div formGroupName="configuration" class="onoffswitch">
+                                    <input type="checkbox" formControlName="device" class="onoffswitch-checkbox" id="device-switch">
+                                    <label class="onoffswitch-label" for="device-switch">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="device-container">Device<span class="context-message">Validate User Device ID.</span></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 validate-container">
+                        <div class="col-sm-2 text-right">
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <div class="float-left">
+                                <div formGroupName="configuration" class="onoffswitch">
+                                    <input type="checkbox" formControlName="userid" class="onoffswitch-checkbox" id="userid-switch">
+                                    <label class="onoffswitch-label" for="userid-switch">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="user-container">User ID<span class="context-message">Validate User Certificate.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 validate-container">
+                        <div class="col-sm-2 text-right">
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            <div class="float-left">
+                                <div formGroupName="configuration" class="onoffswitch">
+                                    <input type="checkbox" formControlName="cookie" class="onoffswitch-checkbox" id="cookie-switch">
+                                    <label class="onoffswitch-label" for="cookie-switch">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="cookie-container">Cookie <span class="context-message">Validate User Session.</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 bottom-block" >
+                <div class="col-md-10"></div>
+                <div class="col-md-2 text-right padding-zero-b">
+                    <button type="submit" id="save-margin" [disabled]="urlForm.invalid || !selectedGroupIds.length" class="btn btn-save">Save</button>
+                    <button type="button" (click)="goToURLProvision();" class="btn btn-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

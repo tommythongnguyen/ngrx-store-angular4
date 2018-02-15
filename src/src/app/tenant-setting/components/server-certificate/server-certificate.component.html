@@ -1,0 +1,141 @@
+<div class="col-sm-12 padding-zero settings-border" [loading]="showLoading">
+    <div class="sub-header">Server Certificates</div>
+
+    <div class="form-container">
+        <form [formGroup]="cerForm" (ngSubmit)="onFormSubmit()">
+
+            <div class="col-sm-12">
+                <div class="col-sm-2 text-right">
+                    <label for="certificate">TLS Certificate
+                                <span class="required-icon">*</span>
+                            </label>
+                </div>
+                <div class="col-sm-8 padding-zero">
+                    <ng-content select=".tsl-certificate-upload"></ng-content>
+                </div>
+            </div>
+
+            <div class="col-sm-12 container-margin">
+                <div class="col-sm-2 text-right">
+                    <label for="fqdn">FQDN
+                        <span class="required-icon">*</span>
+                    </label>
+                </div>
+                <div class="col-sm-8 padding-zero">
+                    <div class="col-sm-12 padding-zero">
+                        <input type="text" class="form-control" id="fqdn" formControlName="fqdn">
+                    </div>
+                    <div class="col-sm-12 padding-zero">
+                        <span class="context-message">The Full Qualified Domain Name for the tenant will be read from the TLS Certificate provided.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 container-margin">
+                <div class="col-sm-2 text-right">
+                    <label for="tls_private_key">TLS Private Key
+                        <span class="required-icon">*</span>
+                    </label>
+                </div>
+
+                <div class="col-sm-8 padding-zero">
+                    <div class="col-sm-12 padding-zero flex-container">
+                        <input  type="text" class="form-control" 
+                                id="tls_private_key" 
+                                placeholder="Please upload Tls Private Key"
+                                formControlName="private_key">
+                        <erag-file-upload [show]="true" 
+                                          [authToken]="authToken" 
+                                          fileType=".key" 
+                                          maxSize="10MB" 
+                                          fileRef="private_key"
+                                          [executeUploadFile]="privateKeyUploadReady"
+                                          [api]="api" 
+                                          [userInfo]="tenantUploadInfo"
+                                          (addFile)="onPrivateKeyAddingFile($event)"
+                                          (addInvalidFile)="onAddingInvalidPrivateKeyFile($event)"
+                                          (uploadSuccess)="onPrivateKeyUploadSuccess($event)"
+                                          (uploadFailure)="onPrivateKeyUploadFailure($event)">
+                        </erag-file-upload>
+                    </div>
+                    <div class="col-sm-12 padding-zero">
+                        <span class="context-message">Upload the TLS Certificate Private Key.</span>
+                    </div>
+
+                    <div class="col-sm-12 padding-zero">
+                        <erag-alert-message [show]="invalidPrivateKeyFile">
+                            Please select '.key' file for TLS Private Key.
+                        </erag-alert-message>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 container-margin">
+                <div class="col-sm-2 text-right">
+                    <label for="root_certificate">Root Certificate
+                            <span class="required-icon">*</span>
+                    </label>
+                </div>
+                <div class="col-sm-8 padding-zero">
+                    <div class="radio-group maxl">
+                        <label class="radio inline">
+                                    <input type="radio" formControlName="certificate_available" [value]="true"><span>Available</span>
+                                </label>
+                        <label class="radio inline">
+                                    <input type="radio" formControlName="certificate_available" [value]="false" ><span>Not Available</span>
+                                </label>
+                        <div class="not-vailable-cer" *ngIf="isNotAvailable">
+                            No Certificate found for the Tenant. Please contact the Erag Administration and provide the CA certificate.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 container-margin" *ngIf="!isNotAvailable">
+                <div class="col-sm-2 text-right">
+                    <label for="client_root_certificate">Client Certificate
+                            <span class="required-icon">*</span>
+                    </label>
+                </div>
+                <div class="col-sm-8 padding-zero">
+                    <div class="col-sm-12 padding-zero flex-container">
+                        <input  type="text" class="form-control" 
+                                id="client_root_certificate"
+                                placeholder="Client Root Certificate"
+                                formControlName="client_certificate">
+
+                        <erag-file-upload   [show]="true" 
+                                            [authToken]="authToken" 
+                                            fileType=".cer" maxSize="10MB" 
+                                            fileRef="client_certificate" 
+                                            extra="root_certificate"
+                                            [executeUploadFile]="clientCertUploadReady" 
+                                            [api]="api"
+                                             [userInfo]="tenantUploadInfo"
+                                            (addFile)="onClientCertificateAddingFile($event)" 
+                                            (addInvalidFile)="onAddingInvalidClientCertFile($event)"
+                                            (uploadSuccess)="onClientCertificateUploadSuccess($event)"
+                                            (uploadFailure)="onClientCertificateUploadFailure($event)">
+                        </erag-file-upload>
+                    </div>
+
+                    <div class="col-sm-12 padding-zero">
+                        <erag-alert-message [show]="invalidClientCerFile">
+                            Please select '.cer' file for Client Certificate.
+                        </erag-alert-message>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 but-border">
+                <button type="submit" class="btn btn-success btn-sm btn-submit-cer" 
+                        id="setting-cer-form" 
+                        [disabled]="checkCerFormInvalidStatus()">
+                    {{formSumitted ? 'Update': 'Submit'}}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<erag-toaster [show]="showToastr" [config]="toastrConfig"></erag-toaster>

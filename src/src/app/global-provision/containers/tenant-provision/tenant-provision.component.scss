@@ -1,0 +1,23 @@
+:host {
+    .tenent-top{margin-top:15px;}
+    
+    .paddingZero{
+        padding:0px;
+    }
+    .btn-cust {
+        border-radius: 3px;
+        padding: 6px 18px 6px 18px;
+        color: #fff;
+        background-color: #ff7900;
+    }
+    .btn-add {
+        background-color: #73c228;
+        border-radius: 3px;
+        color: #fff;
+        margin-left: -20px;
+        padding: 5px 20px 6px 20px;
+        &:focus {
+            outline: none;
+        }
+    }
+}

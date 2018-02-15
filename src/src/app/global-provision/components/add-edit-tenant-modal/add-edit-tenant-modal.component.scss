@@ -1,0 +1,51 @@
+:host {
+
+    .wizard-container{
+        background-color:#eee;
+        border-radius:6px;
+        .tenant-form-container{
+            background-color:#f9f9f9;
+            padding:20px 10px 10px 10px;
+            text-align:left;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border:1px solid #ccc;
+            label{
+                font-size:14px;
+                font-weight:normal
+            }
+            select, input, textarea{
+                border-radius:4px !important;
+                font-size:14px;
+                color:#999;
+                font-weight:normal;
+            }
+           
+        }
+    }
+
+
+    
+    .paddingZero{
+        padding:0px;
+    }
+    .btn-cust {
+        border-radius: 3px;
+        padding: 6px 18px 6px 18px;
+        color: #fff;
+        background-color: #ff7900;
+    }
+    .btn-add {
+        background-color: #73c228;
+        border-radius: 3px;
+        color: #fff;
+        margin-left: -20px;
+        padding: 5px 20px 6px 20px;
+        &:focus {
+            outline: none;
+        }
+    }
+    .btn-back-step{
+        float: left;
+    }
+}

@@ -1,0 +1,57 @@
+:host {
+    .glyphicon-pencil {
+        font-size: 11px;
+        cursor: pointer;
+        background-color: #2f90b7;
+        color: #fff;
+        border-radius: 50%;
+        width: 23px;
+        height: 23px;
+        margin-left: 2%;
+        padding: 0px 3px 0px 3px;
+    }
+    .edit-button {
+        border: none;
+       
+        &:focus {
+            outline: none;
+        }
+    }
+    .status-pending {
+        color: orange;
+        margin-left: 10%
+    }
+    .status-delete-pending {
+        color: orange;
+        margin-left: 10%
+    }
+    .status-reject {
+        color: #FF0000;
+        margin-left: 10%
+    }
+    .status-active {
+        color: #3333FF;
+        margin-left: 10%
+    }
+    .status-deploying-approved {
+        color: #63835C;
+        margin-left: 10%
+    }
+    .status-deploying-rejected {
+        color: #C3391C;
+        margin-left: 10%
+    }
+    .status-deployed-approved {
+        color: #7882B0;
+        margin-left: 10%
+    }
+    .status-on {
+        color: #16ca11;
+        margin-left: 10%
+    }
+    .status-off {
+        color: red;
+        margin-left: 10%
+    }
+    .table > tbody > tr > td {word-break: break-all;border-top:1px solid #ddd;}
+}

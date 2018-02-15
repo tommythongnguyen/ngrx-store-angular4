@@ -1,0 +1,123 @@
+:host{
+    .modal-content{
+        border-radius: 7px;
+        .modal-header{
+            height:46px;
+            padding: 10px 20px 10px 20px;
+            font-size: 14px !important;
+            background-color: #2e7896;
+            color: #fff;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+
+            .close{
+                font-size: 15px;
+                float: right !important;
+                margin-right: 0px !important;
+                margin-top: 2px !important;
+                background-color: white !important;
+                border-radius: 15px !important;
+                width: 20px !important;
+                height: 20px !important;
+                opacity: 1 !important;
+                padding: 0px 0px 1px 1px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        } 
+        .modal-body{
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            
+        }
+        .modal-body>span{color:green !important}
+        .modal-footer{
+            background-color: #eee;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            .btn-custom{
+                border-radius: 3px;
+                padding: 6px 18px 6px 18px;
+                color: #fff;
+            }
+            btn-cancel{
+                @extend .btn-custom;
+                background-color: #767676 ;
+            }
+
+            .btn-submit{
+                @extend .btn-custom;
+                background-color: #ff7900 ;
+            }
+        }
+    } 
+}
+
+
+// :host{ 
+//     .container{
+//         padding:0;
+//         width: 268px;
+//         color: #ff6600;
+//         .interact{
+//             color: #444 !important;
+//             background-color: #fff;
+//         }
+//         &:hover{
+//             @extend .interact;
+//             color:blue;
+//         }
+       
+//         .erad-dropdown-header{
+//             line-height: 1.5;
+//             font-weight: normal;
+            
+//             background-color: #fff;
+//             height: 35px;
+//             border: 1px solid #ddd;
+//             border-radius: 4px;
+//             text-align: left;
+//             text-shadow: 0 0 0 #fff;
+//             background-image: none !important;
+
+//             i.pull-right{
+//                 margin-top:3px;
+//             }
+
+//             input{
+//                 border: none;
+//                 width:90%;
+//                 &:focus {
+//                     outline:none;
+//                 }
+//             }
+//         }  
+        
+//         .dropdown-menu-tenant{
+//             z-index: 3 !important;
+//             //top: 33px;
+//             left: 0;
+//             border-radius: 4px;
+//             min-width: 100%;
+//             width: 100%;
+//             li{
+//                 &:hover{
+//                     cursor: pointer;
+//                 }
+//                 a{
+//                     line-height: 3;
+//                 }    
+//             }    
+//         }
+//         .visible{
+//             display:block;
+//         }
+//         .hidden{
+//             display: none;
+//         }
+//     }
+    
+    
+// }

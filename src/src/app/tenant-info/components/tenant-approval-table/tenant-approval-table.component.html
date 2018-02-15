@@ -1,0 +1,116 @@
+<erag-table-layout>
+    <ng-container class="table-header-right-side nowrap">
+        <div class="filter-by-header">
+            <span>Filter by</span>
+            <erad-dropdown [show]="showFilterDropdown"
+                           width="160px"
+                           icon ="arrow-circle-down"
+                           [tenants]="dropdownStatusList"
+                           [selectedTenant]="dropdownStatusList[1]"
+                           (select)="onFilterByDropdownSelected($event)"
+                            (toggle) ="onFilterByDropdownToggle()">
+            </erad-dropdown>
+        </div>
+        <div class="date-rage-header">
+            <span>Date range</span>
+            <date-time-picker [initDate]="headerControls.fromDate" 
+                              [show]="showFromDatePicker"
+                              direction="dropdown"
+                              width="164px"
+                              placeholder="from"
+                              [maxDate] ="headerControls.toDate"
+                              (toggle)="onDatePickerToggle('fromDate')"
+                              (selected)="onDatePickerSelected($event, 'fromDate')">
+            </date-time-picker>
+            <date-time-picker [initDate]="headerControls.toDate" 
+                              [show]="showToDatePicker"
+                              direction="dropdown"
+                              width="164px"
+                              placeholder="to"
+                              [minDate] ="headerControls.fromDate"
+                              (toggle)= "onDatePickerToggle('toDate')"
+                              (selected)="onDatePickerSelected($event, 'toDate')">
+            </date-time-picker>
+        </div>
+        <div class="search-header">
+            <erag-search (search)="onInputSearch($event)"></erag-search>
+        </div>
+            
+    </ng-container>
+    <ng-container class="table-body">
+        <ng-container *ngIf="approvalList?.length; else noDataMessage">
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkAllApproval" 
+                                  [checked]="isAllSelected" *ngIf="isHavingPendingApprovalTenant" 
+                                  (change)="toggleApprovalList()" name="isAllSelected">
+                        </th>
+                        <th>Request ID <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Type <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Name <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>New/Existing <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Status</th>
+                        <th>Created By <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Created On <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of approvalList; trackBy: trackByFn">
+                    <tr>
+                        <td>
+                            <input type="checkbox" *ngIf="checkApprovalPendingCheckbox(item)" [checked]="item.checked" (change)="onCheckboxChange(item)">
+                        </td>
+                        <td>{{ item.id }}</td>
+                        <td>
+                            {{item.entity_type}}
+                        </td>
+                        <td>{{ item.entity_name}}</td>
+                        <td>{{ requestType(item) }} </td>
+                        <td>{{ item.status}}</td>
+                        <td>{{ item.user.firstname}} {{ item.user.lastname}}</td>
+                        <td>{{ item.created_on | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>
+                            {{item.comments}}
+                            <!-- need to write the logic for comments with popup -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+    </ng-container>
+    <ng-container class="table-footer-left-side" *ngIf="isHavingPendingApprovalTenant">
+        <div class="no-wrap">
+            <button class="btn btn-cust btn-footer-left-side" (click)="onBtnApproveCLick()" [disabled]="!isApprovalSelected">Approve</button>
+            <button class="btn btn-cust btn-footer-left-side" (click)="onBtnRejectCLick()" [disabled]="!isApprovalSelected">Reject</button>
+        </div>
+    </ng-container>
+
+    <ng-container class="table-footer-right-side" *ngIf="paginationControls.totalItems > paginationControls.itemsPerPage">
+        <div class="pull-right" >
+            <erag-pagination [totalItems]="paginationControls.totalItems"
+                             [itemsPerPage]="paginationControls.itemsPerPage"
+                             (pageChange)="onPageChange($event)">
+
+            </erag-pagination>
+        </div>
+        <div class="pull-right">
+            <erad-dropdown  direction="dropup" 
+                            icon="arrow-circle-up"
+                            width ="66px"
+                            [tenants]="paginationChoiceList" 
+                            [selectedTenant]="paginationChoiceList[1]"
+                            [show]="showPaginationDropdown" 
+                            (select)="onPaginationDropdownSelected($event)" 
+                            (toggle)="onPaginationDropdownToggle()">
+            </erad-dropdown>
+        </div>
+    </ng-container>
+</erag-table-layout>
+
+<ng-template #noDataMessage>
+    <div class="text-center message">
+        <span>No Request are available</span>
+    </div>
+</ng-template>

@@ -1,0 +1,50 @@
+<erag-table-layout class="col-md-12 tenent-top" >
+    <ng-container class="table-header-left-side"  *ngIf="isAllowable">
+        <erag-button label="Add Tenant" 
+                     (click)="onAddTenantBtnClicked()">
+        </erag-button>
+    </ng-container>
+
+    <ng-container class="table-header-right-side">
+        <span>Search Tenant</span>
+    </ng-container>
+
+    <ng-container class="table-body">
+        <tenant-provision-table [tenantList]="allTeants$ | async" 
+                                (selected)="onTenantsSeleted($event)" 
+                                (edited)="onTenantEdited($event)">
+        </tenant-provision-table>
+    </ng-container>
+
+    <ng-container class="table-footer-left-side" *ngIf="(allTeants$ | async)?.length>0">
+        <div class="pull-left paddingZero" id="tntPrvnDelete">
+            <button class="btn btn-cust" 
+                    *ngIf="deletingIdsStatus.length" 
+                    (click)="onDeteleBtnClick()">Delete
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container class="table-footer-right-side" *ngIf="(allTeants$ | async)?.length>0">
+        <div class="pull-right">
+            <erag-pagination [totalItems]="(allTeants$ | async)?.length" 
+                             [itemsPerPage]="10">
+            </erag-pagination>
+        </div>
+    </ng-container>
+</erag-table-layout>
+
+<delete-tenant-modal [show]="showDeleteModal" 
+                     (hide)="showDeleteModal = false" 
+                     (confirmed)="onDeleteTenantModalConfirmed()">
+</delete-tenant-modal>
+
+<add-edit-tenant-modal [tenantUsers]='tenantUsers' 
+                       [tenantDetail]='tenantDetail' 
+                       [show]="showAddEditTeantModal" 
+                       [title]="actionType"
+                       [isSubmitting]= "submittingTenantModal"
+                       [tenantID] = "selectedTenantId"
+                       (hide)="showAddEditTeantModal = false" 
+                       (submit)="onAddEditTenantModalSubmit($event)">
+</add-edit-tenant-modal>

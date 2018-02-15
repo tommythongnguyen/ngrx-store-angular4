@@ -1,0 +1,100 @@
+<div class="col-sm-12 settings-border" [loading]="showLoading">
+<div class="sub-header">Two Factor Authentication</div>
+<form [formGroup]="twoFactorForm" (ngSubmit)="onSubmit()">
+    <div class="col-sm-12">
+        <div class="col-sm-2 text-right"></div>
+        <div class="col-sm-8 maxl">
+              <label class="radio inline">
+            <input type="radio" id="enterprise" formControlName="radioType" value="enterprise"> <span>Enterprise</span>
+                </label>
+              <label class="radio inline">
+            <input type="radio" id="google" formControlName="radioType" value="google"><span> Google</span>
+             </label>
+              <label class="radio inline">
+            <input type="radio" id="duo" formControlName="radioType" value="duo"><span> Duo</span>
+             </label>
+        </div>
+</div>
+        <div class="col-sm-12 container-margin">
+            <div class="col-sm-2 text-right"></div>
+            <div class="col-sm-8">
+                <div class="col-sm-12 padding-zero">
+                    <ng-container *ngIf="twoFactorType ==='enterprise'">
+                        <input type="text" class="form-control " id="enterprise" 
+                                formControlName="enterpriseUrl" 
+                                placeholder="Enter Two Factor Authentication Url *">
+                    </ng-container>
+
+                    <ng-container *ngIf="twoFactorType ==='duo'">
+                        <div formGroupName="authDuo">
+
+                            <div class="col-sm-4 padding-zero">
+                                <div class="col-sm-12 padding-zero">
+                                    <input class="form-control" type="text" 
+                                            formControlName="duoSecretKey" 
+                                            placeholder="Secret Key">
+                                </div>
+
+                                <div class="col-sm-12 padding-zero">
+                                    <control-error [parent]="twoFactorForm.controls.authDuo" 
+                                            control="duoSecretKey" 
+                                            label="Secret Key">
+                                    </control-error>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4" style="padding:0 0 0 10px;">
+                                <div class="col-sm-12 padding-zero">
+                                    <input class="form-control" type="text" 
+                                        formControlName="duoIntegrationKey" 
+                                        placeholder="Intergration Key">
+                                    
+                                    <control-error [parent]="twoFactorForm.controls.authDuo" 
+                                            control="duoIntegrationKey" 
+                                            label="Integration Key" >
+                                    </control-error>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4" style="padding:0 0 0 10px;">
+                                <div class="col-sm-12 padding-zero">
+                                    <input class="form-control" type="text" 
+                                        formControlName="duoApiHost" 
+                                        placeholder="API Host">
+                                    
+                                    <control-error [parent]="twoFactorForm.controls.authDuo" 
+                                            control="duoApiHost" 
+                                            label="Api Host" 
+                                            [errors]="{domainRequired: '`.duosecurity.com` is required as domain'}">
+                                    </control-error>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="col-sm-12 padding-zero" *ngIf="twoFactorType ==='enterprise'">
+                    <span class="context-message">Enter Identity Provider Login URL.</span>
+                </div>
+
+                <div class="col-sm-12 padding-zero">
+                    <ng-container *ngIf="twoFactorType ==='enterprise'">
+                        <control-error [parent]="twoFactorForm" 
+                                        control="enterpriseUrl" 
+                                        label="Enterprise Url" 
+                                        [errors]="enterpriseUrlCustomErrors">
+                        </control-error>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 but-border">
+            <button type="submit" 
+                    class="btn btn-success btn-sm btn-form-submit" 
+                    [disabled]="twoFactorForm.invalid">
+                    {{preloadData ? 'Update': 'Submit'}}
+            </button>
+        </div>
+    </form>
+</div>

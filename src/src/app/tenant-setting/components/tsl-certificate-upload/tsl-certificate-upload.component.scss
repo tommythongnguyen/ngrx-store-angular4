@@ -1,0 +1,19 @@
+:host{
+        .invalid-size {
+            color:red;
+        }
+        .flex-container{
+            display: flex;
+            .form-control{
+                flex-grow:1;
+                border-top-right-radius: 0;
+                border-bottom-right-radius:0;
+            }
+        }
+        
+        .context-message{
+            display: block;
+            color: #c9c8c8;
+            font-size: 12px;
+        }
+}

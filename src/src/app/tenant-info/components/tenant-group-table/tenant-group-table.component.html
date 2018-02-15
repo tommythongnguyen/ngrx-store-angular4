@@ -1,0 +1,90 @@
+<erag-table-layout [leftHeadColSize]="4" [rightHeadColSize]="8" >
+    <ng-container class="table-header-left-side " >
+        <erag-button label='Create Custom Group' (click)="onBtnAddCLick()" class = "push-left"></erag-button>
+        <button type="button" class="btn btn-info ml-5 btn-md" (click)="this.showSyncForm = true">Sync AD Group</button>
+    </ng-container>
+    <ng-container class="table-header-right-side" >
+        <div class="col-md-12 text-left syc-block" *ngIf="showSyncForm">
+            <!-- Here will come ad sync component -->
+            <!-- (selected)="onAdSyncGroupSelected($event)" -->
+            <group-adsync-form class="table-body "
+                    [adSyncGroups]="adSyncGroupList"
+                    (search) ="onBtnSearchAdSyncClick($event)"
+                    (hide) ="onBtnHideAdSyncClick()"
+                    (submit)= "onAdSyncSubmitClick($event)"
+                    (resetAdSyncData) = "onResetAdSyncForm()">
+            </group-adsync-form>
+        </div>     
+
+        <div class="search-header" *ngIf="!showSyncForm">
+            <erag-search (search)="onInputSearch($event)"></erag-search>
+        </div>
+    </ng-container>
+    <ng-container class="table-body" *ngIf="groupList?.length; else noDataMessage">
+        <ng-container>
+            <table class="table table-striped approve-td">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkAllGroup" 
+                                  [checked]="isAllSelected"
+                                  (change)="toggleGroupList()" name="isAllSelected">
+                        </th>
+                        <th>Group Name <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Type <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Last Sync <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                        <th>Status</th>
+                        <th>No. of Users <i class="glyphicon glyphicon-triangle-bottom"></i></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of groupList; trackBy: trackByFn">
+                    <tr>
+                        <td>
+                            <input type="checkbox" [checked]="item.checked" (change)="onCheckboxChange(item)">
+                        </td>
+                        <td><a role="button" (click)="onGroupNameClick(item)">{{ item.name }}</a></td>
+                        <td>
+                            <span *ngIf="item.type == '1'">AD Synced</span>
+                            <span *ngIf="item.type == '0'">Manual</span>
+                        </td>
+                        <td>{{item.synctime}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{item.userscount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+    </ng-container>
+    <ng-container class="table-footer-left-side" *ngIf="groupList?.length;">
+        <div>
+            <button class="btn btn-cust btn-footer-left-side" (click)="onBtnDeleteCLick()" [disabled]="!isGroupSelected">Delete</button>
+        </div>
+    </ng-container>
+
+    <ng-container class="table-footer-right-side" *ngIf="paginationControls.totalItems > paginationControls.itemsPerPage">
+        <div class="pull-right">
+            <erag-pagination [totalItems]="paginationControls.totalItems"
+                             [itemsPerPage]="paginationControls.itemsPerPage"
+                             (pageChange)="onPageChange($event)">
+
+            </erag-pagination>
+        </div>
+        <div class="pull-right">
+            <erad-dropdown  direction="dropup" 
+                            icon="arrow-circle-up"
+                            width ="66px"
+                            [tenants]="paginationChoiceList" 
+                            [selectedTenant]="paginationChoiceList[1]"
+                            [show]="showPaginationDropdown" 
+                            (select)="onPaginationDropdownSelected($event)" 
+                            (toggle)="onPaginationDropdownToggle()">
+            </erad-dropdown>
+        </div>
+    </ng-container>
+</erag-table-layout>
+
+<ng-template #noDataMessage>
+    <div class="text-center message">
+        <span>No Groups are available</span>
+    </div>
+</ng-template>

@@ -1,0 +1,101 @@
+:host {
+    .container {
+        padding: 0;
+        width: 100%;
+        color: #ff6600;
+
+        .interact {
+            color: #444 !important;
+            background-color: #fff;
+        }
+
+        &:hover {
+            @extend .interact;
+
+            color: blue;
+        }
+
+        .erad-dropdown-header {
+            display: flex;
+            padding:0;
+            line-height: 1.5;
+            font-weight: normal;
+            background-color: #fff;
+            height: 35px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: left;
+            text-shadow: 0 0 0 #fff;
+            background-image: none !important;
+
+            ul {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+                li {
+                    display: flex;
+                    border: solid red 1px;
+                    padding:5px;
+
+                    i {
+                        padding: 4px;
+                        &:hover {
+                            cursor: pointer;
+                            color: red;
+                        }
+
+                    }
+                }
+            }
+
+            input {
+                flex-grow: 1;
+                border: none;
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            i.toggle-icon {
+                padding: 10px 10px 0 10px;
+                &:hover {
+                    color: teal;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .dropdown-menu-tenant {
+            display: none;
+            z-index: 3 !important;
+
+            //top: 33px;
+            left: 0;
+            border-radius: 4px;
+            min-width: 100%;
+            width: 100%;
+
+            li {
+                &:hover {
+                    cursor: pointer;
+                }
+
+                a {
+                    line-height: 3;
+                }
+            }
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .disableBtn {
+            pointer-events: none;
+        }
+    }
+}

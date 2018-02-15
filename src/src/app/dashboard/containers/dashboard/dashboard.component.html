@@ -1,0 +1,36 @@
+<div class="row map-block" [loading]="isLoading">
+    <div class="col-sm-12 map-height">
+        <div class="ip-report-container">
+            <ip-report [show]="showIpReport" [reportList]="ipReportList" (toggle)="onToggleIpReport()" (select)="onSelectIpAddress($event)">
+
+                <div class="pagination-container">
+                    <erag-pagination [maxSize]="pageMaxSize" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" [totalItems]="totalIps" (pageChange)="onPaginationChange($event)">
+                    </erag-pagination>
+                </div>
+            </ip-report>
+        </div>
+
+        <google-map [mapOptions]="mapOptions" [markers]="markers$ | async" (ready)="onMapReady($event)" (markerClick)="onMarkerClick($event)" (idle)="onMapIdle()" (zoomChange)="onZoomChange($event)" (centerChange)="onCenterChange($event)" (selectIp)="onSelectIpAddress($event)">
+        </google-map>
+
+        <footer-controls (viewTraffic)="onViewTraffic()"></footer-controls>
+    </div>
+</div>
+
+<erag-modal [show]="showIpDetailsModal" customWidth="94%" (hide)="onHideModalIpDetails()">
+    <span class="erag-modal-header">IP Details: {{currentIpAddress}}</span>
+
+    <div class="erag-modal-body">
+        <ip-details-table [marker]="ipDetailsMarker" (sort)="onIpDetailTableSort($event)" [ipDetails]="ipDetails$ | async">
+            
+            <erag-search class="input-search" (search)="onIpDetailsInputSearch($event)"></erag-search>
+
+            <div class="ip-details-pagination">
+                <erag-pagination [maxSize]="pageMaxSize" [itemsPerPage]="currentIpPage.itemsPerPage" [currentPage]="currentIpPage.page" [totalItems]="totalIpDetails" (pageChange)="onIpDetailsPaginationChange($event)">
+                </erag-pagination>
+            </div>
+        </ip-details-table>
+    </div>
+</erag-modal>
+
+<!-- <erag-toaster message="hello Tommy" show="true"></erag-toaster> -->

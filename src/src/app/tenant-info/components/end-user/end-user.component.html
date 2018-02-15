@@ -1,0 +1,46 @@
+<div [formGroup]="enduserForm">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="Enter the First Name" formControlName="firstname" id="firstname">
+            <control-error  [parent]="enduserForm"
+                                        control="firstname"
+                                        label ="First name"
+                                        [errors]="{ required : 'is required',max:'is invalid',alpha: 'must contain letters only'}">
+            </control-error>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Enter the Last Name" formControlName="lastname" id="lastname">
+            <control-error  [parent]="enduserForm"
+                                        control="lastname"
+                                        label ="Last name"
+                                        [errors]="{ required : 'is required',max:'is invalid',alpha: 'must contain letters only'}">
+            </control-error>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>User ID</label>
+            <input type="text" class="form-control" placeholder="Enter the User ID" formControlName="ldapid" id="ldapid">
+            <control-error  [parent]="enduserForm"
+                                        control="ldapid"
+                                        label ="User ID"
+                                        [errors]="{ required : 'is required',max:'is invalid',min:'is invalid'}">
+            </control-error>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="Enter the Email" formControlName="email" id="email">
+            <control-error  [parent]="enduserForm"
+                                        control="email"
+                                        label ="Email"
+                                        [errors]="{ required : 'is required',customEmail:'is incorrect format'}">
+            </control-error>
+        </div>
+    </div>
+</div>

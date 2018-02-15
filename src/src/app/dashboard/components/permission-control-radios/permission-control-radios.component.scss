@@ -1,0 +1,47 @@
+:host{
+    .btn{
+        margin: 4px;
+        padding: 3px 15px 3px 15px;
+        background-color: #fff;
+        font-size: 12px;
+        border: 1px solid #ccc;
+        border-radius: 20px !important;
+        margin-left: 0;
+    }   
+    .btn-allow{
+        color: #026fca;
+        &:hover{
+            @extend .allowed-active;
+            cursor: pointer;
+        }
+    }
+    
+    .btn-denied{
+        color: #ff0000;
+        &:hover{
+            @extend .denied-active;
+            cursor: pointer;
+        }
+    }
+    
+    .btn-all{
+        color: #fca823;
+        &:hover{
+            @extend .all-active;
+            cursor: pointer;
+        }
+    }
+
+    .allowed-active{
+        background-color: #026fca;
+        color: #fff;
+    }
+    .denied-active{
+        background-color: #CA0003;
+        color: #fff;
+    }
+    .all-active{
+        background-color: #fca823;
+        color: #fff;
+    }
+}

@@ -1,0 +1,47 @@
+<div class="allow-deni">
+    <permission-control-radios [radioValue]="radioPermissionValue" (change)="onRadioPermisionChange($event)">
+    </permission-control-radios>
+
+    <div>
+        <port-control-radios [radioValue]="radioPortValue" (change)="onRadioPortsChange($event)">
+        </port-control-radios>
+    </div>
+</div>
+
+<div class="row tenant-traffic">
+    <div class="col-sm-3 tenant-dropdown" *ngIf="checkUserPermission('super')">
+        <erad-dropdown icon="caret-up" filterable="true" filterField="name" 
+                        [selectedTenant]="selectedTenant" 
+                        [tenants]="tenants"
+                        [message]="tenantMessage" 
+                        [show]="showTenantDropdown"
+                         direction="dropup" 
+                         width="100%" 
+                        (toggle)="onToggleTenantDropdown()"
+                        (select)="onSelectTenant($event)">
+        </erad-dropdown>
+    </div>
+
+    <div class="col-sm-3" *ngIf="checkUserPermission('tenant')">
+        <pre style="color:#555">{{tenants[0].name}}</pre>
+    </div>
+
+    <div class="col-sm-9 date-filter-container">
+        <date-nav [list]="listOfDate" [activeItem]="selectedDateNav" [disable]="tenants.length === 0" (select)="onSelectDateNav($event)">
+        </date-nav>
+
+        <div class="col-sm-12 tenant-traffic-date">
+            <label class="date-label">From Date</label>
+            <date-time-picker [show]="showFromDate" [initDate]="fromDateValue" [maxDate]="toDateValue" (toggle)="onToggleFromDate()"
+                (selected)="onSelectFromDate($event)">
+            </date-time-picker>
+
+            <label class="date-label">To Date</label>
+            <date-time-picker [show]="showToDate" [initDate]="toDateValue" [minDate]="fromDateValue" (toggle)="onToggleToDate()"
+                (selected)="onSelectToDate($event)">
+            </date-time-picker>
+
+            <button class="btn btn-view-traffic" (click)="onViewTraffic()">View Traffic</button>
+        </div>
+    </div>
+</div>

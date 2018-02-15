@@ -1,0 +1,28 @@
+
+:host {
+    
+    .dashboard-navbar-container {
+        border-radius: 0;
+        width: 100%;
+        z-index: 4;
+        position: fixed;
+        background-color: #f8f8f8;
+        border-color: transparent;
+        .dashboard-container {
+            margin-right: -1px;
+            margin-top: -1px;
+            padding-right: 0;
+            padding-left: 0;
+            .header-title {
+        
+                font-weight:200;
+                float: left;
+                vertical-align: middle;
+                font-size: 18px;
+                color: #444;
+                margin-left: 0.8em;
+                line-height: 2.7
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+@import './app/shared/components/erag-loading/erag-loading.directive';
+html, body {
+    overflow: auto;
+    overflow-x: hidden;
+    height:100%;
+    background-color: #f9f9f9;
+    font-family:thdCustomFont,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing: antialiased;}
+
+    /*font-family: 'Open Sans', sans-serif;-webkit-font-smoothing: antialiased;*/
+    @font-face {font-family: thdCustomFont;src: url(./assets/fonts/open-sans.regular.ttf);}
+    @font-face {font-family: thdCustomFont;src: url(./assets/fonts/opensans-regular-webfont.woff);}
+
+    tenant-provision, global-approval, reports, activity, tenant-info , tenant-home{
+        margin-top: 46px;
+        display: block
+    }
+    :focus {outline:0 !important;}
+    .file-cust{padding:0px 10px 0 0 !important;    background-color: #ccc !important;}
+    .file-disable{cursor:not-allowed}
+    .fa-folder-open-o{margin-right:5px;background-color: #888;padding: 9px;}
+    .no-wrap{white-space: nowrap}
+    .table th{border-bottom:2px solid #c5c5c5 !important;font-weight:normal;color:#000}
+    .table th i{font-size:11px;margin-left:5px;}   
+    .table > tbody > tr > td {color:#999 !important;}
+    .table-body-container{background-color:#fff;overflow:hidden}
+    .table > tbody + tbody{border-top: 1px solid #ddd !important}
+    .bottom-block{white-space: nowrap}
+    .but-border{padding-right:0;}
+     .settings-border{margin-bottom:15px;padding:0;border: 1px solid #eee;border-radius: 5px}
+     .table-user{border:4px solid #fff;background-color:#e8f2f6 !important;}
+     .user-td{border-bottom:1px solid #fff;color:#666}
+     .table-user>thead>tr>th{height:36px;background-color:#2e7896;color:#fff;border-bottom:0px !important;}
+     .table-user>tbody>tr>td{border-bottom:1px solid #ccc !important;background-color:#eee !important;color:#999;}
+    /*.sub-header{border-bottom:0px dashed #ccc !important}
+    .but-border{border-bottom:0px dashed #eee !important}*/
+    .padding-zero-b{padding-right:0}
+    .message {
+        color: green;
+        margin: 10px;
+        font-weight: 12px;
+        font-style: normal;
+    }
+
+    .btn-cust{
+    border-radius: 3px;
+    padding: 6px 14px 6px 14px;
+    color: #fff;
+    background-color: #ff7900;
+}
+
+  .btn-cust:hover{
+    border-radius: 3px;
+    padding: 6px 14px 6px 14px;
+    color: #fff;
+    background-color: #ff7900;
+}
+
+.btn-cancel {
+    border-radius: 3px;
+    padding: 6px 14px 6px 14px;
+    color: #fff;
+    background-color: #767676;
+}
+
+[hidden] { 
+    display: none !important;
+}
+
+
+label {font-weight: normal}
+
+
